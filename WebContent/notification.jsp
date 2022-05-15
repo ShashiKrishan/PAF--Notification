@@ -22,7 +22,7 @@
 				<form id="formNotification" name="formNotification" method="post" action="notification.jsp">
 				  	Notification ID:
 				  	<input id="notificationId" name="notificationId" type="text" 
-				 	         class="form-control form-control-sm">
+				 	         class="form-control form-control-sm" disabled>
 				  	<br> Account ID:
 				  	<input id="accountId" name="accountId" type="text"
 				         	 class="form-control form-control-sm">
@@ -48,15 +48,8 @@
 				    <br>  Date Notify:
 				   	<input id="dateNotify" name="dateNotify" type="text"
 				           		class="form-control form-control-sm">	
-				    <br>  First Name:
-				   	<input id="firstName" name="firstName" type="text"
-				           		class="form-control form-control-sm">	       		
-				       				       
-				    <br>  NIC:
-				   	<input id="nic" name="nic" type="text"
-				           		class="form-control form-control-sm">       			
-					
-				   <br> 
+				         			
+					<br> 
 				    <input id="btnSave" name="btnSave" type="button" value="Save"
 				          class="btn btn-primary">
 				    <input type="hidden" id="hidAppIDSave" name="hidAppIDSave" value="">

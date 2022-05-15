@@ -8,7 +8,7 @@ $(document).ready(function()
 }
 );
 
-//SAVE======================================
+// To SAVE Data---------------------------------------------
 $(document).on("click", "#btnSave", function(event)
 {
 	//clear alerts-----------------------
@@ -17,7 +17,7 @@ $(document).on("click", "#btnSave", function(event)
 	$("#alertError").text("");
 	$("#alertError").hide();
 	
-	//Form validation-------------------------
+	//Form validations-------------------------
 	var status = validationNotificationForm();
 	if(status != true)
 	{
@@ -77,27 +77,30 @@ function onNotificationSaveComplete(response, status)
 	$("#formNotification")[0].reset();
 	}
 
-//UPDATE=========================================================
+//UPDATE Function--------------------------------------------------
 $(document).on("click", ".btnUpdate",function(event)
 {
-	//$("#hidAppIDSave").val(
-			//$(this).closest("tr").find('#hidAppIDUpdate').val());
-	console.log($(this).closest("tr"));
-	document.getElementById("hidAppIDSave").value = "Update";
-	$("#id").val($(this).closest("tr").find('td:eq(0)').text());
-	$("#hospitalid").val($(this).closest("tr").find('td:eq(1)').text());
-	$("#patientid").val($(this).closest("tr").find('td:eq(2)').text());
-	$("#date").val($(this).closest("tr").find('td:eq(3)').text());
-	$("#time").val($(this).closest("tr").find('td:eq(4)').text());
-	$("#description").val($(this).closest("tr").find('td:eq(5)').text());
+	
+	
+	$("#hidAppIDSave").val($(this).closest("tr").find('td:eq(0)').text());
+	
+	$("#notificationId").val($(this).closest("tr").find('td:eq(0)').text());
+	$("#accountId").val($(this).closest("tr").find('td:eq(1)').text());
+	$("#billid").val($(this).closest("tr").find('td:eq(2)').text());
+	$("#amountToBePaid").val($(this).closest("tr").find('td:eq(3)').text());
+	$("#email").val($(this).closest("tr").find('td:eq(4)').text());
+	$("#mobileNumber").val($(this).closest("tr").find('td:eq(5)').text());
+	$("#subject").val($(this).closest("tr").find('td:eq(6)').text());
+	$("#massage").val($(this).closest("tr").find('td:eq(7)').text());
+	$("#dateNotify").val($(this).closest("tr").find('td:eq(8)').text());
 	
 	
 });
 
-//DELETE==========================================================
+//DELETE Function----------------------------------------
 $(document).on("click", ".btnRemove", function(event)
 {
-	//AJAX for delete
+	//AJAX to delete
 	$.ajax(
 		{
 			url : "NotificationAPI",
@@ -141,51 +144,60 @@ function onNotificationDeleteComplete(response, status)
 	}
 }
 
-//CLIENT-MODEL============================================
+//CLIENT-MODEL Validations--------------------
 function validationNotificationForm()
 {
-	//ID
-	if($("#id").val().trim() == "")
+	
+	
+	//account id
+	if($("#accountId").val().trim() == "")
 	{
-		return "Insert Notification id.";
+		return "Insert Account Id.";
 	}
 	
-	//hospitalid
-	if($("#hospitalid").val().trim() == "")
+	//Bill id
+	if($("#billid").val().trim() == "")
 	{
-		return "Insert Hospital id.";
+		return "Insert Bill Id.";
 	}
 	
-	//patientid
-	if($("#patientid").val().trim() == "")
+	//Amount to be paid
+	if($("#amountToBePaid").val().trim() == "")
 	{
-		return "Insert Patient id.";
+		return "Insert Amount To Be Paid.";
 	}
 	
-	//date
-	if($("#date").val().trim() == "")
+	//email
+	if($("#email").val().trim() == "")
 	{
-		return "Insert date.";
+		return "Insert Email.";
 	}
 	
-	//time
-	if($("#time").val().trim() == "")
+	//mobile number
+	if($("#mobileNumber").val().trim() == "")
 	{
-		return "Insert time.";
+		return "Insert Mobile Number.";
 	}
 	
-	//description
-	if($("#description").val().trim() == "")
+	//Subject
+	if($("#subject").val().trim() == "")
 	{
-		return "Insert description.";
+		return "Insert Subject.";
 	}
 	
-	//Status
-	if($("#status").val().trim() == "")
+	//Message
+	if($("#massage").val().trim() == "")
 	{
-		return "Insert status.";
+		return "Insert Message.";
+	}
+	
+	//Date Notify
+	if($("#dateNotify").val().trim() == "")
+	{
+		return "Insert Date Notify.";
 	}
 	
 	
+
 	return true;
 }

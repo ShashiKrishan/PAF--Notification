@@ -31,7 +31,7 @@ public class Notification {
      * @param dateNotify
      * @return
      */
-    public String insertNotification(String accountId, String billId, Double amountToBePaiddouble,
+    public String insertNotification(String accountId, String billId, String amountToBePaiddouble,
            String email, String mobileNumber, String subject, String massage, String dateNotify
             )
     { 
@@ -58,7 +58,7 @@ public class Notification {
                 preparedStmt.setString(1, "NI"+datetime); 
                 preparedStmt.setString(2, accountId); 
                 preparedStmt.setString(3, billId); 
-                preparedStmt.setDouble(4, amountToBePaiddouble);  
+                preparedStmt.setDouble(4, Double.parseDouble(amountToBePaiddouble) );  
                 preparedStmt.setString(5, email); 
                 preparedStmt.setString(6, mobileNumber); 
                 preparedStmt.setString(7, subject);  
@@ -68,15 +68,17 @@ public class Notification {
                 // execute the statement
                 preparedStmt.execute();  
                 con.close(); 
-                output = "Notification insert successfully"; 
-            } 
-            catch (Exception e) 
-            { 
-            output = "Error while inserting the Notification"; 
-            System.err.println(e.getMessage()); 
-            } 
-        return output; 
-    } 
+                String newAppointment = readNotification();
+				output = "{\"status\":\"success\", \"data\": \"" + newAppointment + "\"}";
+			}
+			catch (Exception e)
+			{
+				output = "{\"status\":\"error\", \"data\": \"Error while inserting the appointment details. \"}";
+				System.err.println(e.getMessage());
+			}
+			
+			return output;
+		} 
      /**
      * Get data User and bill database
      * @return
@@ -112,7 +114,7 @@ public class Notification {
         { 
             String notificationId  = rs.getString("notificationId"); 
             String accountId  = rs.getString("accountId"); 
-            String billId  = rs.getString("joinDate"); 
+            String billId  = rs.getString("billId"); 
             Double amountToBePaid  = rs.getDouble("amountToBePaid"); 
             String email  = rs.getString("email"); 
             String mobileNumber  = rs.getString("mobileNumber"); 
@@ -156,7 +158,7 @@ public class Notification {
     
    
    
-    public String updateNotification(String notificationId , String accountId , String billId , Double amountToBePaid ,
+    public String updateNotification(String notificationId , String accountId , String billId , String amountToBePaiddouble ,
     String email , String mobileNumber , String subject , String massage , String dateNotify )  
     
     { 
@@ -174,7 +176,7 @@ public class Notification {
         preparedStmt.setString(1, notificationId); 
         preparedStmt.setString(2, accountId); 
         preparedStmt.setString(3, billId); 
-        preparedStmt.setDouble(4, amountToBePaid);
+        preparedStmt.setDouble(4, Double.parseDouble(amountToBePaiddouble));  
         preparedStmt.setString(5, email); 
         preparedStmt.setString(6, mobileNumber);
         preparedStmt.setString(7, subject); 
@@ -185,11 +187,15 @@ public class Notification {
     // execute the statement
     preparedStmt.execute(); 
     con.close(); 
-    output = "Updated successfully"; 
+    //output = "Updated successfully"; 
+    String newAppointment = readNotification();
+	output = "{\"status\":\"success\", \"data\": \"" + newAppointment + "\"}";
     } 
         catch (Exception e) 
     { 
-        output = "Error while updating the Notification."; 
+        //output = "Error while updating the Notification."; 
+        	output = "{\"status\":\"error\", \"data\": \"Error while updating the appointment details. \"}";
+        	
         System.err.println(e.getMessage()); 
     } 
         return output; 

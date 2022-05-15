@@ -40,13 +40,45 @@ public class NotificationAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		
+				
+				String output = newObj.insertNotification(
+														request.getParameter("accountId"),
+														request.getParameter("billid"),
+														request.getParameter("amountToBePaid"),
+														request.getParameter("email"),
+														request.getParameter("mobileNumber"),
+														request.getParameter("subject"),
+														request.getParameter("massage"),
+														request.getParameter("dateNotify"));
+														
+													
+				
+				response.getWriter().write(output);			
+		
+		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Map paras = getParasMap(request);
+		String output = newObj.updateNotification(paras.get("notificationId").toString(),
+				
+				paras.get("accountId").toString(),
+				paras.get("billid").toString(),
+				paras.get("amountToBePaid").toString(),
+				paras.get("email").toString(),
+				paras.get("mobileNumber").toString(),
+				paras.get("subject").toString(),
+				paras.get("massage").toString(),
+				paras.get("dateNotify").toString());
+				
+		response.getWriter().write(output);
 	}
 
 	/**
